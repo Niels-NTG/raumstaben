@@ -1,3 +1,5 @@
+// Audio in + 4 channel MIDI visualiser
+
 // TODO documentation
 // TODO fft visualisation
 // TODO tweakables UI
@@ -8,13 +10,12 @@ var fft;
 
 var recordHighLevel = 0;
 
-var tones = [
+var channels = [
 	{
 		text: 'BUMM',
 		active: false,
 		enableAddress: 144,
 		disableAddress: 128,
-
 		pitch: 0,
 		gate: 0,
 	},
@@ -78,10 +79,10 @@ function draw() {
 	ellipse(width / 2, height, currentLevelRadius, currentLevelRadius);
 
 	noStroke();
-	for (let i = 0; i < tones.length; i++) {
-		const tone = tones[i];
-		if (tone.active) {
-			text(tone.text, 32, 32 + (100 * i));
+	for (let i = 0; i < channels.length; i++) {
+		const channel = channels[i];
+		if (channel.active) {
+			text(channel.text, 32, 32 + (100 * i));
 		}
 	}
 }
@@ -97,17 +98,17 @@ p5.midi.onInput = function(e) {
 
 	console.log(e.data);
 
-	for (let i = 0; i < tones.length; i++) {
-		let tone = tones[i];
-		if (address === tone.enableAddress) {
-			tone.active = true;
-		} else if (address === tone.disableAddress) {
-			tone.active = false;
+	for (let i = 0; i < channels.length; i++) {
+		let channel = channels[i];
+		if (address === channel.enableAddress) {
+			channel.active = true;
+		} else if (address === channel.disableAddress) {
+			channel.active = false;
 		}
 
-		if (address === tone.enableAddress || address === tone.disableAddress) {
-			tone.pitch = pitch;
-			tone.gate = gate;
+		if (address === channel.enableAddress || address === channel.disableAddress) {
+			channel.pitch = pitch;
+			channel.gate = gate;
 		}
 	}
 }
