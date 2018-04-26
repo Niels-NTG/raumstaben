@@ -22,7 +22,7 @@ function draw() {
 	stroke(map(currentPitch, 0, 100, 0, 360), 100, 100);
 	ellipse(width / 2, height / 2, r, r);
 }
-
+//change
 function keyPressed() {
 	if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
 }
