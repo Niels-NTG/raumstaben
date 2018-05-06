@@ -1,4 +1,6 @@
 // TODO better smoothing
+// TODO fix text alignment
+// TODO add text overflow bleeding edges
 
 // https://kylemcdonald.github.io/cv-examples/FrameDifference/
 
@@ -18,9 +20,9 @@ var gui;
 var capture;
 var previousPixels;
 var threshold = 200;
+var showMovementCapture = true;
 var movementValue = 0;
 var maxMovementValue = 1;
-var movementValueArray = [];
 
 function preload() {
 	loadFontFile();
@@ -46,6 +48,7 @@ function setup() {
 
 	gui = QuickSettings.create(10, 10);
 	gui.bindRange('threshold', 0, 400, threshold, 1, window);
+	gui.bindBoolean('showMovementCapture', showMovementCapture, window);
 	gui.addHTML('font info', '');
 	gui.addFileChooser('font file name', fontFileName, '*', loadFontFile);
 	gui.bindRange('fontSize', 0, 200, fontSize, 0.01, window);
@@ -98,24 +101,14 @@ function draw() {
 	}
 
 	if (movementValue > 0) {
-		capture.updatePixels();
-		image(capture, 0, 0, width, height);
-		maxMovementValue = max(maxMovementValue, movementValue);
-		movementValueArray.push(movementValue);
-		if (movementValueArray.length > 32) {
-			movementValueArray.shift();
+		if (showMovementCapture) {
+			capture.updatePixels();
+			image(capture, 0, 0, width, height);
 		}
-		var tAvg = avg(movementValueArray);
-		if (abs(movementValue - tAvg) < tAvg * 0.5) {
-			setFontAxisValue();
-		}
-	}
-}
 
-function avg(array) {
-	return array.reduce(function(m, v) {
-		return m + v;
-	}, 0) / array.length;
+		maxMovementValue = max(maxMovementValue, movementValue);
+		setFontAxisValue();
+	}
 }
 
 function setFontAxisValue() {
