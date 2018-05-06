@@ -1,24 +1,39 @@
 var font = null;
 var fontSize = 60;
+var textAlign = 'left';
 var textToRender = "Pa's wijze lynx bezag vroom het fikse aquaduct";
 var fontFileName = 'data/KairosSans_Variable.ttf';
+var wordBreak = false;
+var textColor = '#d3d3d3';
+var backgroundColor = '#2f4f4f';
 var fontAxes = [];
 
-var pElement = document.getElementById('p');
-pElement.innerText = textToRender;
+var textElement = document.getElementById('text');
+textElement.innerText = textToRender;
 
 var gui = QuickSettings.create(10, 10);
 gui.addHTML('font info', '');
-gui.addFileChooser('font file name', 'font file', '*', loadFontFile);
-gui.bindRange('fontSize', 0, 200, fontSize, 0.1, this);
+gui.addFileChooser('font file name', fontFileName, '*', loadFontFile);
+gui.bindRange('fontSize', 0, 200, fontSize, 0.01, this);
+gui.bindDropDown('textAlign', ['left', 'right', 'center', 'justify', 'start', 'end'], this);
+gui.bindBoolean('wordBreak', wordBreak, this);
+gui.bindColor('textColor', textColor, this);
+gui.bindColor('backgroundColor', backgroundColor, this);
 gui.setGlobalChangeHandler(renderText);
 
 function renderText() {
+
 	if (!font) return;
-	pElement.style.fontSize = fontSize + 'pt';
-	pElement.style.fontVariationSettings = fontAxes.map(function (axis) {
+
+	document.body.style.backgroundColor = backgroundColor;
+	textElement.style.fontSize = fontSize + 'pt';
+	textElement.style.textAlign = textAlign;
+	textElement.style.wordBreak = wordBreak ? 'break-all' : '';
+	textElement.style.color = textColor;
+	textElement.style.fontVariationSettings = fontAxes.map(function (axis) {
 		return '"' + axis.tag + '" ' + axis[axis.tag];
 	}).join(', ');
+
 }
 
 function updateGUI() {
@@ -39,6 +54,7 @@ function updateGUI() {
 	fontAxes.forEach(function(axis) {
 		gui.bindRange(axis.tag, axis.minValue, axis.maxValue, axis.defaultValue, 0.01, axis);
 	});
+
 }
 
 function loadFontFile(file) {
@@ -63,6 +79,7 @@ function onFontLoaded(font) {
 		gui.removeControl(axis.tag);
 	});
 
+	// Add current value at value of default axis value.
 	fontAxes = font.tables.fvar.axes;
 	fontAxes = fontAxes.map(function(axis) {
 		axis[axis.tag] = axis.defaultValue;
@@ -72,7 +89,7 @@ function onFontLoaded(font) {
 	document.getElementById('font-styles').innerText =
 		'@font-face {font-family:"' + font.names.fontFamily.en + '"; ' +
 		'src: url("' + fontFileName + '") format("truetype");}';
-	pElement.style.fontFamily = font.names.fontFamily.en;
+	textElement.style.fontFamily = font.names.fontFamily.en;
 
 	updateGUI();
 	renderText();
