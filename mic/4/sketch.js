@@ -1,5 +1,6 @@
 var mic;
 var fft;
+var fftEnergy = ['none', 'bass', 'lowMid', 'mid', 'highMid', 'treble'];
 
 var font = null;
 var fontSize = 60;
@@ -43,14 +44,19 @@ function setup() {
 }
 
 function draw() {
+	fft.analyze();
 	setFontAxisValue();
 }
 
 function setFontAxisValue() {
 	if (!font) return;
 	fontAxes.forEach(function (axis) {
-		if (axis[axis.tag + '_enabled']) {
-			axis[axis.tag] = lerp(axis.minValue, axis.maxValue, mic.getLevel());
+		if (axis[axis.tag + '_input'] !== 'none') {
+			axis[axis.tag] = map(
+				fft.getEnergy(axis[axis.tag + '_input']),
+				0, 255,
+				axis.minValue, axis.maxValue
+			);
 		} else {
 			axis[axis.tag] = axis.defaultValue;
 		}
@@ -101,14 +107,14 @@ function onFontLoaded(font) {
 	window.font = font;
 
 	fontAxes.forEach(function (axis) {
-		gui.removeControl(axis.tag + '_enabled');
+		gui.removeControl(axis.tag + '_input');
 	});
 
 	// Add current value at value of default axis value.
 	fontAxes = font.tables.fvar.axes;
 	fontAxes = fontAxes.map(function (axis) {
 		axis[axis.tag] = axis.defaultValue;
-		axis[axis.tag + '_enabled'] = true;
+		axis[axis.tag + '_input'] = 'none';
 		return axis;
 	});
 
@@ -118,7 +124,7 @@ function onFontLoaded(font) {
 	textElement.style.fontFamily = font.names.fontFamily.en;
 
 	fontAxes.forEach(function (axis) {
-		gui.bindBoolean(axis.tag + '_enabled', axis[axis.tag + '_enabled'], axis);
+		gui.bindDropDown(axis.tag + '_input', fftEnergy , axis);
 	});
 
 	updateGUI();
