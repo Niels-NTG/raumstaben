@@ -58,7 +58,6 @@ function updateGUI() {
 }
 
 function loadFontFile(file) {
-	console.log(file);
 	if (file) {
 		fontFileName = URL.createObjectURL(file);
 	}
