@@ -19,17 +19,24 @@ var gui;
 function setup() {
 	noCanvas();
 
+	// Start audio input
 	mic = new p5.AudioIn();
 	mic.start();
+
+	// Start FFT (Fast Fourier Transform) audio analysis on
+	// the mic input.
+	// For more info, see: https://p5js.org/reference/#/p5.FFT
 	fft = new p5.FFT();
 	fft.setInput(mic);
 
+	// Create text input element
 	textElement = createDiv(textToRender);
 	textElement.attribute('contenteditable', true);
 	textElement = textElement.elt;
 	textElement.style.outline = 'none';
 	textElement.style.width = 'inherit';
 
+	// Create GUI for tweaking values during runtime
 	gui = QuickSettings.create(10, 10);
 	gui.addHTML('font info', '');
 	gui.addFileChooser('font file name', fontFileName, '*', loadFontFile);
@@ -50,6 +57,8 @@ function draw() {
 
 function setFontAxisValue() {
 	if (!font) return;
+
+	// Set axis value by getting the sound energy output of the set type
 	fontAxes.forEach(function (axis) {
 		if (axis[axis.tag + '_input'] !== 'none') {
 			axis[axis.tag] = map(
@@ -61,23 +70,35 @@ function setFontAxisValue() {
 			axis[axis.tag] = axis.defaultValue;
 		}
 	});
+
 	renderText();
 	updateGUI();
 }
 
 function renderText() {
+	// Apply background color
 	document.body.style.backgroundColor = backgroundColor;
+
+	// Apply font size
 	textElement.style.fontSize = fontSize + 'pt';
+
+	// Apply text alignment
 	textElement.style.textAlign = textAlignment;
+
+	// Apply breaking text at the character or word level
 	textElement.style.wordBreak = wordBreak ? 'break-all' : '';
+
+	// Apply text color
 	textElement.style.color = textColor;
+
+	// Apply variable font settings
 	textElement.style.fontVariationSettings = fontAxes.map(function (axis) {
 		return '"' + axis.tag + '" ' + axis[axis.tag];
 	}).join(', ');
 }
 
 function updateGUI() {
-	// Show font info
+	// Show font info: name, font axis count and axis tags with current values
 	var axesInfo = fontAxes.map(function (axis) {
 		return axis.tag + ' (' + axis.name.en + ')\t ' + axis[axis.tag];
 	}).join('\n');
@@ -106,11 +127,13 @@ function loadFontFile(file) {
 function onFontLoaded(font) {
 	window.font = font;
 
+	// Remove old font axis controls
 	fontAxes.forEach(function (axis) {
 		gui.removeControl(axis.tag + '_input');
 	});
 
-	// Add current value at value of default axis value.
+	// Add current value at value of default axis value
+	// Add key-value pair for currently selected input type
 	fontAxes = font.tables.fvar.axes;
 	fontAxes = fontAxes.map(function (axis) {
 		axis[axis.tag] = axis.defaultValue;
@@ -118,11 +141,13 @@ function onFontLoaded(font) {
 		return axis;
 	});
 
+	// Use fornt for text input area
 	document.getElementById('font-styles').innerText =
 		'@font-face {font-family:"' + font.names.fontFamily.en + '"; ' +
 		'src: url("' + fontFileName + '") format("truetype");}';
 	textElement.style.fontFamily = font.names.fontFamily.en;
 
+	// Create a drop down input for setting the input of each font axis
 	fontAxes.forEach(function (axis) {
 		gui.bindDropDown(axis.tag + '_input', fftEnergy , axis);
 	});
