@@ -4,6 +4,7 @@ var tracker;
 function setup() {
 	capture = createCapture(VIDEO);
 	capture.size(640, 480);
+	capture.position(0, 0);
 	capture.hide();
 
 	var c = createCanvas(capture.width, capture.height);
@@ -21,20 +22,18 @@ function setup() {
 }
 
 function draw() {
-	image(capture, 0, 0, width, height)
+	clear();
+	// image(capture, 0, 0, width, height)
 
 	let pos = tracker.getCurrentPosition();
-	for (let i = 0; i < pos.length; i++) {
-		let element = pos[i];
-		stroke(255);
-		fill(100, 100, 100);
-		ellipse(element[0], element[1], 32, 32);
-		noStroke();
-		fill(0);
-		text(i, element[0], element[1]);
+	if (pos) {
+		var leftEye = pos[28]
+		var rightEye = pos[23];
+		var d = dist(leftEye[0], leftEye[1], rightEye[0], rightEye[1]);
+		ellipse(width / 2, height / 2, d, d);
 	}
 }
 
 function keyPressed() {
-	if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), '.png');
+	if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
 }
