@@ -2,28 +2,63 @@
 
 Collection of sketches for the Generative Gestaltung course at Folkwang University of Arts.
 
-## Instructions
-Download the contents of this repository by clicking the green "Clone or download" button and than "Download ZIP" at the top of the page.
+Setup
+-----
+The setup allows you to run a local web server using node. If any of that sounds too foreign or is not of interest and you just want to run the sketches, jump down to [Running the Sketches](#Running-the-sketches).
 
-To correctly run some of these sketches, you require to run a local webserver.
+1. Install [node.js](https://nodejs.org) (go for the latest stable version)
+2. Open Terminal and navigate over to the `Code-Package-p5.js` folder that you downloaded onto your computer:
 
-### MacOS/Linux
-On MacOS or Linux, open Terminal.app and enter the following command and hit enter:
-```
-cd Downloads/raumstaben-master/
-```
-This sets the context of the current terminal to be inside the raumstaben-master folder. Use the appropriate path if you put the folder on some other location.
+  ```
+  $ cd path/to/folder
+  # e.g. cd /Users/GG/Documents/Code-Package-p5.js
+  ```
 
-The start a local webserver from the current folder, enter the following command:
-```
-python -m SimpleHTTPServer 8000
-```
-Now open a webbrowser of your choice at `localhost:8000` as its URL. You will see a listing of files and directories of `raumstaben-master`
+3. Run:
 
-if this does not work you can also try:
+  ```
+  $ npm install
+  ```
+
+
+Running the Sketches
+--------------------
+
+While most of the sketches work without running a local webserver, there are some sketches that will not run properly since they use external files<sup>2</sup> (e.g. images or data) to create and inform the visualization. To run the sketches, you are welcome to use a local webserver of your liking.
+
+There are many ways to start a local webserver. Please see the options below (not in any particular order)
+
+**Option 1**
+
+One method is to to use the local webserver of your choice (e.g. [simple python webserver](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server)) and open up `localhost:<port>`in your browser<sup>1</sup>.
+
 ```
-python3 -m http.server
+$ cd path/to/folder
+# e.g. cd /Users/GG/Documents/Code-Package-p5.js
+
+$ python -m SimpleHTTPServer
+# check localhost:8000
 ```
 
-### Windows
-`// TODO instructions for Windows`
+**Option 2**
+
+If you've already followed the instructions in the [Setup](#Setup) section and you're using [Node.js](https://nodejs.org/en/), you can follow the instructions below:
+
+1. Start a local web server (with live reload) by typing in your Terminal or Commandline the command below. This will open the `index.html` file (list of all sketches) a new browser window.
+
+  ```
+  $ npm start
+  ```
+
+2. Click on any of the links 🔗 listed to view and interact with the sketches.
+3. Interact, create, save, and share your work!
+
+
+<sup>1</sup>The default port is `8000`, but you can change the port number by specifying the number after the command `e.g. python -m SimpleHTTPServer 5000`
+
+<sup>2</sup>Some sketches work only as expected when the files are placed online, as the rely on "security" sensitive functionality like loading external files. If you try to view them locally without running a web server, you get some kind of "cross-origin" errors 😭 (see your browser's console). The solution is to serve the files using what's called a [local web server](https://github.com/processing/p5.js/wiki/Local-server). This is what happens when you run `npm start` as shown above or when you run your own local server.
+
+
+Note on using the little_bits sketches
+--------------------------------------
+To establish communication between the browser and the LittleBits/Arduino hardware, you need to run the application [p5.SerialControl](https://github.com/vanevery/p5.serialcontrol/releases/latest) in the background while the hardware is connected. You also need to upload the Arduino source code to the hardware in order it to work correctly.
