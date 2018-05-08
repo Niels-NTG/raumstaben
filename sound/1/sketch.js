@@ -1,3 +1,5 @@
+// Simple sketch that represents the current microphone level as a
+
 var mic;
 
 // Highest recorded mic level
