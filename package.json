@@ -5,8 +5,7 @@
   "scripts": {
     "start": "npm run watch",
     "watch": "budo --host localhost --dir . --open --live --watch-glob '**/*.{html,css,js}'",
-    "setup": "cd libraries && node setup.js",
-    "encapsulate": "cd libraries && node encapsulate.js"
+    "setup": "cd libraries && node setup.js"
   },
   "license": "Apache-2.0",
   "repository": {
@@ -15,10 +14,11 @@
   },
   "homepage": "http://www.generative-gestaltung.de/2",
   "dependencies": {
-    "budo": "^9.2.2",
+    "budo": "^11.2.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^4.0.2",
     "fs-sync": "^1.0.4",
-    "glob": "^7.1.1",
-    "cheerio": "^1.0.0-rc.2",
-    "fs-extra": "^4.0.2"
+    "glob": "^7.1.1"
   }
 }
