@@ -1,32 +1,32 @@
 var fs = require('fs-sync');
 var path = require('path');
 var glob = require('glob');
+var marked = require('marked');
 
 // generate index.html file with links to all sketches
 var sketchFiles = glob.sync('../sketches/*/*');
 var sketchList = [];
 var sketchCategories = [];
 var html = '';
-// console.log(sketchFiles);
 
 sketchFiles.forEach(sketchPath => {
 
     let categoryName = path.basename(path.dirname(sketchPath));
+    let relativePath = path.relative('..', sketchPath);
 
     if (fs.isDir(sketchPath) && fs.exists(path.join(sketchPath, 'sketch.js'))) {
 
-        let relativePath = path.relative('..', sketchPath);
-        let viewLink = path.join(relativePath, 'index.html');
-        let imageLink = path.join(relativePath, 'export.png');
-        let sourceLink = path.join(relativePath, 'sketch.js');
+        let viewPath = path.join(relativePath, 'index.html');
+        let imagePath = fs.exists(path.join(sketchPath, 'export.png')) && path.join(relativePath, 'export.png');
+        let sourcePath = path.join(relativePath, 'sketch.js');
         let sourceFile = fs.read(path.join(sketchPath, 'sketch.js'));
         let sourceHeader = sourceFile.replace(/\n\n(?:.|\n)+/gm, '').replace('//', '').trim();
         let sketchName = path.basename(sketchPath);
 
         sketchList.push({
-            viewLink: viewLink,
-            imageLink: imageLink,
-            sourceLink: sourceLink,
+            viewPath: viewPath,
+            imagePath: imagePath,
+            sourcePath: sourcePath,
             sketchHeader: sourceHeader,
             sketchName: sketchName,
             categoryName: categoryName
@@ -35,7 +35,11 @@ sketchFiles.forEach(sketchPath => {
     } else if (path.extname(sketchPath) === '.md') {
 
         let categoryAbout = fs.read(sketchPath);
-        categoryAbout = categoryAbout.replace(/^#.+?\n/g, '').trim();
+        categoryAbout = marked(categoryAbout);
+        categoryAbout = categoryAbout.replace(
+            /src=['"](.+)?['"]/g,
+            'src="' + path.dirname(relativePath) + '/$1"'
+        );
 
         sketchCategories.push({
             categoryName: categoryName,
@@ -44,28 +48,40 @@ sketchFiles.forEach(sketchPath => {
     }
 
 });
-// console.log(sketchList, sketchCategories);
 
+var html = '<head>\n';
+html += '\t<link href="styles/list.css" rel="stylesheet" type="text/css">\n';
+html += '</head>\n<body>\n';
+html += '<h1>RAUMSTABEN</h1>\n';
 sketchCategories.forEach(sketchCategory => {
 
     let categorySketches = sketchList.filter(sketch => {
         return sketch.categoryName === sketchCategory.categoryName;
     });
 
-    html += '<div class="category">';
-    html += '<p>' + sketchCategory.categoryAbout + '</p>';
+    html += '<section>\n';
+    html += '\t' + sketchCategory.categoryAbout + '\n';
 
     categorySketches.forEach(sketch => {
 
-        html += '<a href="' + sketch.viewLink + '" title="' + sketch.sketchName + '">\n';
-        html += '\t<img src="' + sketch.imageLink + '" alt="' + sketch.sketchName +'" />\n';
-        html += '\t<span class="btn--link">' + sketch.sketchName + '</span>\n';
-        html += '\t<p>' + sketch.sketchHeader + '</p>\n';
-        html += '</a>\n';
+        html += '\t<div class="sketch">\n';
+        html += '\t\t<div class="sketch__img">';
+            if (sketch.imagePath) {
+            html += '<img src="' + sketch.imagePath + '" alt="' + sketch.sketchName +'" />';
+        }
+        html += '</div>\n';
+        html += '\t\t<div class="sketch__about">\n';
+        html += '\t\t\t<h2>' + sketch.sketchName + '</h2>\n'
+        html += '\t\t\t' + marked(sketch.sketchHeader) + '\n';
+        html += '\t\t\t<a class="btn--link" href="' + sketch.viewPath + '">play</a>\n';
+        html += '\t\t</div>\n';
+        html += '\t</div>\n';
 
     });
 
-});
+    html += '</section>\n';
 
-console.log(html);
+});
+html += '</body>';
+
 fs.write('../index.html', html);

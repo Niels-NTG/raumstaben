@@ -1,91 +1,174 @@
-<div class="category"><p>Series of sketches designed for LittleBits (https://www.littlebits.com/) and Arduino (https://www.arduino.cc/) hardware platform.
+<head>
+	<link href="styles/list.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>RAUMSTABEN</h1>
+<section>
+	<h1 id="little-bits">Little Bits</h1>
+<p>Series of sketches designed for <a href="https://www.littlebits.com/">LittleBits</a> and <a href="https://www.arduino.cc/">Arduino</a> hardware platform.</p>
+<p>LittleBits are a series of electronic building blocks that magnetically snap together. The blue bits are for power, the magenta for both digital input (buttons, gates, toggles, etc.) and analog sensors (dimmers, sliders, light sensors, sound, tempature, etc.) and green ones show output. The orange bits are for wiring and extending your creations, of which W6 Arduino Bit is a microcontroller. This is a tiny computer that can receive and control connected electronics using logic you can code yourself. It also allows for communication between the Bits and a computer.</p>
+<p>Each sketch includes the Arduino program that has to be uploaded to the microcontroller. This requires the Arduino IDE. For more information on how to get started programming on the Arduino platform, visit <a href="https://www.arduino.cc/">https://www.arduino.cc/</a>.</p>
+<p>Sketches 1, 2 and 3 are programmed for a hardware setup that is equal or similar to the one pictured below:</p>
+<p><img src="sketches/little-bits/example-hardware-setup.jpg">
+The i5 slide dimmer bits can be replaced with a light sensor, pressure sensor, tempature sensor, microphone or any other analog sensor. The 7-segment display bits and single LED bit can be used for demonstrating the sensor readings on the hardware itself, but are not required for working with the sketches.</p>
 
-LittleBits are a series of electronic building blocks that magnetically snap together. The blue bits are for power, the magenta for both digital input (buttons, gates, toggles, etc.) and analog sensors (dimmers, sliders, light sensors, sound, tempature, etc.) and green ones show output. The orange bits are for wiring and extending your creations, of which W6 Arduino Bit is a microcontroller. This is a tiny computer that can receive and control connected electronics using logic you can code yourself. It also allows for communication between the Bits and a computer.
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>1-pressure-sensor</h2>
+			<p>Analog pressure sensor visualisation</p>
 
-Each sketch includes the Arduino program that has to be uploaded to the microcontroller. This requires the Arduino IDE. For more information on how to get started programming on the Arduino platform, visit https://www.arduino.cc/.
+			<a class="btn--link" href="sketches/little-bits/1-pressure-sensor/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>2-light-sensor</h2>
+			<p>Analog light sensor visualisation</p>
 
-Sketches 1, 2 and 3 are programmed for a hardware setup that is equal or similar to the one pictured below:
+			<a class="btn--link" href="sketches/little-bits/2-light-sensor/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>3-dual-analog-sensors</h2>
+			<p>Analog pressure sensor + analog light sensor + digital input visualisation</p>
 
-<img src="example-hardware-setup.jpg">
+			<a class="btn--link" href="sketches/little-bits/3-dual-analog-sensors/index.html">play</a>
+		</div>
+	</div>
+</section>
+<section>
+	<h1 id="midi">MIDI</h1>
+<p>Series of sketches for visualising MIDI input.</p>
+<p>MIDI (Musical Instrument Digital Interface) <a href="https://en.wikipedia.org/wiki/MIDI">https://en.wikipedia.org/wiki/MIDI</a> is a standard for connecting electronic music devices to each other. Using a MIDI connection, you can connect keyboards, sequencers, drum machines, DAW applications to your computer.</p>
+<p>When using MacOS, you can check and manage the connection status of MIDI devices with the Audio/MIDI Configuration tool. By clicking the keyboard-shaped icon in the toolbar you can hear incoming signals if a device is connected.</p>
+<p><img src="sketches/midi/audio-midi-config-tool.png"></p>
 
-The i5 slide dimmer bits can be replaced with a light sensor, pressure sensor, tempature sensor, microphone or any other analog sensor. The 7-segment display bits and single LED bit can be used for demonstrating the sensor readings on the hardware itself, but are not required for working with the sketches.</p><a href="sketches/little-bits/1-pressure-sensor/index.html" title="1-pressure-sensor">
-	<img src="sketches/little-bits/1-pressure-sensor/export.png" alt="1-pressure-sensor" />
-	<span class="btn--link">1-pressure-sensor</span>
-	<p>Analog pressure sensor visualisation</p>
-</a>
-<a href="sketches/little-bits/2-light-sensor/index.html" title="2-light-sensor">
-	<img src="sketches/little-bits/2-light-sensor/export.png" alt="2-light-sensor" />
-	<span class="btn--link">2-light-sensor</span>
-	<p>Analog light sensor visualisation</p>
-</a>
-<a href="sketches/little-bits/3-dual-analog-sensors/index.html" title="3-dual-analog-sensors">
-	<img src="sketches/little-bits/3-dual-analog-sensors/export.png" alt="3-dual-analog-sensors" />
-	<span class="btn--link">3-dual-analog-sensors</span>
-	<p>Analog pressure sensor + analog light sensor + digital input visualisation</p>
-</a>
-<div class="category"><p>Series of sketches for visualising MIDI input.
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/midi/1-pitch/export.png" alt="1-pitch" /></div>
+		<div class="sketch__about">
+			<h2>1-pitch</h2>
+			<p>Single channel MIDI pitch visualisation.</p>
 
-MIDI (Musical Instrument Digital Interface) https://en.wikipedia.org/wiki/MIDI is a standard for connecting electronic music devices to each other. Using a MIDI connection, you can connect keyboards, sequencers, drum machines, DAW applications to your computer.
+			<a class="btn--link" href="sketches/midi/1-pitch/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/midi/2-gate/export.png" alt="2-gate" /></div>
+		<div class="sketch__about">
+			<h2>2-gate</h2>
+			<p>Audio in + 4 channel MIDI gate visualiser.</p>
 
-When using MacOS, you can check and manage the connection status of MIDI devices with the Audio/MIDI Configuration tool. By clicking the keyboard-shaped icon in the toolbar you can hear incoming signals if a device is connected.
+			<a class="btn--link" href="sketches/midi/2-gate/index.html">play</a>
+		</div>
+	</div>
+</section>
+<section>
+	<h1 id="sound">Sound</h1>
+<p>Series of sketches that transform input from the microphone into visuals.</p>
 
-<img src="audio-midi-config-tool.png"></p><a href="sketches/midi/1-pitch/index.html" title="1-pitch">
-	<img src="sketches/midi/1-pitch/export.png" alt="1-pitch" />
-	<span class="btn--link">1-pitch</span>
-	<p>Single channel MIDI pitch visualisation.</p>
-</a>
-<a href="sketches/midi/2-gate/index.html" title="2-gate">
-	<img src="sketches/midi/2-gate/export.png" alt="2-gate" />
-	<span class="btn--link">2-gate</span>
-	<p>Audio in + 4 channel MIDI gate visualiser.</p>
-</a>
-<div class="category"><p>Series of sketches that transform input from the microphone into visuals.</p><a href="sketches/sound/1-level/index.html" title="1-level">
-	<img src="sketches/sound/1-level/export.png" alt="1-level" />
-	<span class="btn--link">1-level</span>
-	<p>Simple sketch that represents the current microphone level as a circle radius.</p>
-</a>
-<a href="sketches/sound/2-waveform/index.html" title="2-waveform">
-	<img src="sketches/sound/2-waveform/export.png" alt="2-waveform" />
-	<span class="btn--link">2-waveform</span>
-	<p>Simple sketch that represents the current microphone level + waveform.</p>
-</a>
-<a href="sketches/sound/3-spectrum-analysis/index.html" title="3-spectrum-analysis">
-	<img src="sketches/sound/3-spectrum-analysis/export.png" alt="3-spectrum-analysis" />
-	<span class="btn--link">3-spectrum-analysis</span>
-	<p>Simple sketch that represents the current microphone level + waveform + spectrum analysis.</p>
-</a>
-<a href="sketches/sound/4-variable-font-range-energy/index.html" title="4-variable-font-range-energy">
-	<img src="sketches/sound/4-variable-font-range-energy/export.png" alt="4-variable-font-range-energy" />
-	<span class="btn--link">4-variable-font-range-energy</span>
-	<p>Manipulate variable font axes by spectrum energy levels.</p>
-</a>
-<div class="category"><p>Series of sketches that manimulate and transform typography.</p><a href="sketches/typo/1-variable-font-tester/index.html" title="1-variable-font-tester">
-	<img src="sketches/typo/1-variable-font-tester/export.png" alt="1-variable-font-tester" />
-	<span class="btn--link">1-variable-font-tester</span>
-	<p>Variable font tester. For more variable fonts, check out this list: https://docs.google.com/spreadsheets/d/1ycxOqpcPA9NmCWcNbmxiY-KHEh820MucI1eO6QkKLOE/htmlview#gid=0</p>
-</a>
-<div class="category"><p>Series of sketches that use video input.</p><a href="sketches/video/1-face-tracking/index.html" title="1-face-tracking">
-	<img src="sketches/video/1-face-tracking/export.png" alt="1-face-tracking" />
-	<span class="btn--link">1-face-tracking</span>
-	<p>Webcam face tracking. See https://github.com/auduno/clmtrackr for reference.</p>
-</a>
-<a href="sketches/video/2-nose-tracking/index.html" title="2-nose-tracking">
-	<img src="sketches/video/2-nose-tracking/export.png" alt="2-nose-tracking" />
-	<span class="btn--link">2-nose-tracking</span>
-	<p>Nose-based drawing based on face tracking technology. See https://github.com/auduno/clmtrackr for reference.</p>
-</a>
-<a href="sketches/video/3-face-distance/index.html" title="3-face-distance">
-	<img src="sketches/video/3-face-distance/export.png" alt="3-face-distance" />
-	<span class="btn--link">3-face-distance</span>
-	<p>Face distance measurement based on face tracking technology. See https://github.com/auduno/clmtrackr for reference.</p>
-</a>
-<a href="sketches/video/4-point-tracking/index.html" title="4-point-tracking">
-	<img src="sketches/video/4-point-tracking/export.png" alt="4-point-tracking" />
-	<span class="btn--link">4-point-tracking</span>
-	<p>Track points in video footage. Based on https://inspirit.github.io/jsfeat/sample_oflow_lk.html</p>
-</a>
-<a href="sketches/video/5-variable-font-movement/index.html" title="5-variable-font-movement">
-	<img src="sketches/video/5-variable-font-movement/export.png" alt="5-variable-font-movement" />
-	<span class="btn--link">5-variable-font-movement</span>
-	<p>Manipulate variable font axes by movement detected in webcam footage.</p>
-</a>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/sound/1-level/export.png" alt="1-level" /></div>
+		<div class="sketch__about">
+			<h2>1-level</h2>
+			<p>Simple sketch that represents the current microphone level as a circle radius.</p>
+
+			<a class="btn--link" href="sketches/sound/1-level/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/sound/2-waveform/export.png" alt="2-waveform" /></div>
+		<div class="sketch__about">
+			<h2>2-waveform</h2>
+			<p>Simple sketch that represents the current microphone level + waveform.</p>
+
+			<a class="btn--link" href="sketches/sound/2-waveform/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/sound/3-spectrum-analysis/export.png" alt="3-spectrum-analysis" /></div>
+		<div class="sketch__about">
+			<h2>3-spectrum-analysis</h2>
+			<p>Simple sketch that represents the current microphone level + waveform + spectrum analysis.</p>
+
+			<a class="btn--link" href="sketches/sound/3-spectrum-analysis/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/sound/4-variable-font-range-energy/export.png" alt="4-variable-font-range-energy" /></div>
+		<div class="sketch__about">
+			<h2>4-variable-font-range-energy</h2>
+			<p>Manipulate variable font axes by spectrum energy levels.</p>
+
+			<a class="btn--link" href="sketches/sound/4-variable-font-range-energy/index.html">play</a>
+		</div>
+	</div>
+</section>
+<section>
+	<h1 id="typography">Typography</h1>
+<p>Series of sketches that manimulate and transform typography.</p>
+
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/typo/1-variable-font-tester/export.png" alt="1-variable-font-tester" /></div>
+		<div class="sketch__about">
+			<h2>1-variable-font-tester</h2>
+			<p>Variable font tester. For more variable fonts, check out this list: <a href="https://docs.google.com/spreadsheets/d/1ycxOqpcPA9NmCWcNbmxiY-KHEh820MucI1eO6QkKLOE/htmlview#gid=0">https://docs.google.com/spreadsheets/d/1ycxOqpcPA9NmCWcNbmxiY-KHEh820MucI1eO6QkKLOE/htmlview#gid=0</a></p>
+
+			<a class="btn--link" href="sketches/typo/1-variable-font-tester/index.html">play</a>
+		</div>
+	</div>
+</section>
+<section>
+	<h1 id="video">Video</h1>
+<p>Series of sketches that use video input.</p>
+
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/video/1-face-tracking/export.png" alt="1-face-tracking" /></div>
+		<div class="sketch__about">
+			<h2>1-face-tracking</h2>
+			<p>Webcam face tracking. See <a href="https://github.com/auduno/clmtrackr">https://github.com/auduno/clmtrackr</a> for reference.</p>
+
+			<a class="btn--link" href="sketches/video/1-face-tracking/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>2-nose-tracking</h2>
+			<p>Nose-based drawing based on face tracking technology. See <a href="https://github.com/auduno/clmtrackr">https://github.com/auduno/clmtrackr</a> for reference.</p>
+
+			<a class="btn--link" href="sketches/video/2-nose-tracking/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>3-face-distance</h2>
+			<p>Face distance measurement based on face tracking technology. See <a href="https://github.com/auduno/clmtrackr">https://github.com/auduno/clmtrackr</a> for reference.</p>
+
+			<a class="btn--link" href="sketches/video/3-face-distance/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"></div>
+		<div class="sketch__about">
+			<h2>4-point-tracking</h2>
+			<p>Track points in video footage. Based on <a href="https://inspirit.github.io/jsfeat/sample_oflow_lk.html">https://inspirit.github.io/jsfeat/sample_oflow_lk.html</a></p>
+
+			<a class="btn--link" href="sketches/video/4-point-tracking/index.html">play</a>
+		</div>
+	</div>
+	<div class="sketch">
+		<div class="sketch__img"><img src="sketches/video/5-variable-font-movement/export.png" alt="5-variable-font-movement" /></div>
+		<div class="sketch__about">
+			<h2>5-variable-font-movement</h2>
+			<p>Manipulate variable font axes by movement detected in webcam footage.</p>
+
+			<a class="btn--link" href="sketches/video/5-variable-font-movement/index.html">play</a>
+		</div>
+	</div>
+</section>
+</body>
