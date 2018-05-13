@@ -58,7 +58,15 @@ If you've already followed the instructions in the [Setup](#Setup) section and y
 
 <sup>2</sup>Some sketches work only as expected when the files are placed online, as the rely on "security" sensitive functionality like loading external files. If you try to view them locally without running a web server, you get some kind of "cross-origin" errors 😭 (see your browser's console). The solution is to serve the files using what's called a [local web server](https://github.com/processing/p5.js/wiki/Local-server). This is what happens when you run `npm start` as shown above or when you run your own local server.
 
+Editing sketches
+----------------
+To edit or create sketches, open the `sketch.js` file in your text editor of choice. Recommend is to use a text editor specially optimised for programming like those listed below.
+- [Visual Studio Code](https://github.com/Microsoft/vscode)
+- [Sublime Text](https://www.sublimetext.com/)
+- [Atom](https://atom.io/)
 
-Note on using the little_bits sketches
+To get at better sense on what's going on inside your code, you can use the browser's built-in console to get an insight in your variables and methods. See [this guide](https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-developer-console) for more information.
+
+Note on using the little-bits sketches
 --------------------------------------
 To establish communication between the browser and the LittleBits/Arduino hardware, you need to run the application [p5.SerialControl](https://github.com/vanevery/p5.serialcontrol/releases/latest) in the background while the hardware is connected. You also need to upload the Arduino source code to the hardware in order it to work correctly.
