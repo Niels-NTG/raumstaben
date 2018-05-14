@@ -71,7 +71,7 @@ sketchCategories.forEach(sketchCategory => {
         }
         html += '</div>\n';
         html += '\t\t<div class="sketch__about">\n';
-        html += '\t\t\t<h2>' + sketch.sketchName + '</h2>\n'
+        html += '\t\t\t<h2>' + sketch.sketchName.replace(/\-/g, ' ') + '</h2>\n'
         html += '\t\t\t' + marked(sketch.sketchHeader) + '\n';
         html += '\t\t\t<a class="btn--link" href="' + sketch.viewPath + '">play</a>\n';
         html += '\t\t</div>\n';
