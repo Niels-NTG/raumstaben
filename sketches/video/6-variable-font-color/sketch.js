@@ -25,8 +25,7 @@ function setup() {
 	capture.position(0, 0);
 	capture.hide();
 
-	var c = createCanvas(windowWidth, windowHeight);
-	c.position(0, 0);
+	createCanvas(windowWidth, windowHeight);
 
 	// Create text input element
 	textElement = createDiv(textToRender);
