@@ -6,7 +6,7 @@ var tracker;
 function setup() {
 	// Create video capture
 	capture = createCapture(VIDEO);
-	capture.size(640, 480);
+	capture.size(windowWidth, windowHeight);
 	capture.hide();
 
 	createCanvas(capture.width, capture.height);

@@ -6,8 +6,7 @@ var tracker;
 function setup() {
 	// Create video capture
 	capture = createCapture(VIDEO);
-	capture.size(640, 480);
-	capture.position(0, 0);
+	capture.size(windowWidth, windowHeight);
 	capture.hide();
 
 	createCanvas(windowWidth, windowHeight);
@@ -34,6 +33,8 @@ function draw() {
 		ellipse(width / 2, height / 2, d, d);
 		fill(0);
 		text(round(d), width / 2, height / 2);
+		ellipse(leftEye[0], leftEye[1], 16, 16);
+		ellipse(rightEye[0], rightEye[1], 16, 16);
 	}
 }
 
