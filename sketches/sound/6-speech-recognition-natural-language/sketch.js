@@ -1,4 +1,4 @@
-// Simple sketch demonstrating speech recognition using the [p5.Speech](http://ability.nyu.edu/p5.js-speech/) library and natural language processing using [RiTa](https://rednoise.org/rita/reference/).
+// Simple sketch demonstrating speech recognition using the [p5.Speech](http://ability.nyu.edu/p5.js-speech/) library and natural language processing using [RiTa](https://rednoise.org/rita/reference/). For more information on working with RiTa natural language processing, see this video by Daniel Shiffman https://www.youtube.com/watch?v=lIPEvh8HbGQ.
 
 var textElement;
 
