@@ -1,4 +1,4 @@
-// Simple sketch that represents the current microphone level as a circle radius.
+// Simple sketch that represents the current microphone level as a circle radius. For an introduction in working with microphone input, see this Daniel Shiffman video https://youtu.be/q2IDNkUws-A.
 
 var mic;
 

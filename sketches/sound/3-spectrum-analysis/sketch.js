@@ -1,4 +1,4 @@
-// Simple sketch that represents the current microphone level + waveform + spectrum analysis.
+// Simple sketch that represents the current microphone level + waveform + spectrum analysis. For an introduction in working with FFT waveform analysis, watch this video by Daniel Shiffman https://www.youtube.com/watch?v=2O3nm0Nvbi4.
 
 var mic;
 var fft;
