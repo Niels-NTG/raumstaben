@@ -34,16 +34,12 @@ function setup() {
 	background(backgroundColor);
 
 	// Fit image proportionally
-	var imageWidth = imageFile.width;
-	var imageHeight = imageFile.height;
-	if (imageWidth < imageHeight) {
-		imageWidth = height / (imageHeight / imageWidth);
-		imageHeight = height;
+	if (imageFile.width < imageFile.height) {
+		imageFile.resize(0, height);;
 	} else {
-		imageHeight = width / (imageWidth / imageHeight);
-		imageWidth = width;
+		imageFile.resize(width, 0);
 	}
-	image(imageFile, 0, 0, imageWidth, imageHeight);
+	image(imageFile, 0, 0);
 
 	// Get image title
 	var title = imageData.getChild('file').getChild('name').content;
@@ -68,10 +64,10 @@ function setup() {
 
 	// Rotate title 90 degrees (π ÷ 2 in radians) when image is taller than it is wide
 	push();
-	if (imageWidth < imageHeight) {
+	if (imageFile.width < imageFile.height) {
 		rotate(HALF_PI);
 	} else {
-		translate(0, imageHeight);
+		translate(0, imageFile.height);
 	}
 
 	textAlign(LEFT, BOTTOM);
@@ -81,7 +77,7 @@ function setup() {
 	// Show author
 	textSize(20);
 	textAlign(RIGHT, BOTTOM);
-	text(imageData.getChild('file').getChild('author').content.replace(/<[^>]*>/g, '').trim(), imageWidth, imageHeight);
+	text(imageData.getChild('file').getChild('author').content.replace(/<[^>]*>/g, '').trim(), imageFile.width, imageFile.height);
 
 	// Show location coordinates, if defined
 	if (imageData.getChild('file').getChild('location')) {
@@ -89,13 +85,13 @@ function setup() {
 			return cord.content;
 		}).join('\n');
 		textAlign(RIGHT, TOP);
-		text(locationText, imageWidth, 0);
+		text(locationText, imageFile.width, 0);
 	}
 
 	// Show image description
 	textAlign(LEFT, TOP);
 	fill(255);
-	text(imageData.getChild('description').content.replace(/<[^>]*>/g, '').trim(), imageWidth, 0);
+	text(imageData.getChild('description').content.replace(/<[^>]*>/g, '').trim(), imageFile.width, 0);
 
 	// Show list of categories the image belongs to
 	textAlign(LEFT, BOTTOM);
@@ -103,5 +99,5 @@ function setup() {
 	var categories = imageData.getChild('categories').children.map(category => {
 		return category.content;
 	}).join('\n');
-	text(categories, imageWidth, height);
+	text(categories, imageFile.width, height);
 }
