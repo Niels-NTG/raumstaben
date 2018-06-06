@@ -1,0 +1,1 @@
+curl -w "%{url_effective}" -I -L -s -S https://commons.wikimedia.org/wiki/Special:Random/File -o /dev/null | sed -e 's/.*File\:/https\:\/\/tools.wmflabs.org\/magnus-toolserver\/commonsapi.php\\?image\=/g' | xargs -n1 curl -s -L -- > data/imageData.xml
