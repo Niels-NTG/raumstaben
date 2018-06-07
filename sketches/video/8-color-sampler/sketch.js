@@ -1,10 +1,8 @@
-// webcam color sampler.
+// Webcam color sampler.
 
 var capture;
-var showCapture = true;
 var sampleColorCount = 100;
 var sampleQuality = 100;
-var captureImage;
 
 var rowCount = 8;
 var columnCount = 8;
@@ -24,26 +22,29 @@ function setup() {
 
 	// Create GUI for tweaking values during runtime
 	gui = QuickSettings.create(10, 10);
-	gui.bindBoolean('showCapture', showCapture, window);
 	gui.bindRange('sampleColorCount', 1, 100, sampleColorCount, 1, window);
 	gui.bindRange('sampleQuality', 1, 1000, sampleQuality, 1, window);
 	gui.bindNumber('rowCount', 1, windowHeight, rowCount, 1, window);
 	gui.bindNumber('columnCount', 1, windowWidth, columnCount, 1, window);
-
 }
 
 function draw() {
 	// Start drawing if webcam is ready
 	if (!capture.loadedmetadata) return;
 
+	// Calculate vertical and horizontal pixel size
 	var rowPixelSize = capture.height / rowCount;
 	var columnPixelSize = capture.width / columnCount;
 
+	// Iterate through each subdivision
 	for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
 		for (var columnIndex = 0; columnIndex < columnCount; columnIndex++)	{
 
+			// Get a region of pixels from the capture image at the current subdivision
 			var block = capture.get(columnPixelSize * columnIndex, rowPixelSize * rowIndex, columnPixelSize, rowPixelSize);
 			block.loadPixels();
+
+			// Sample quantized average color from subdivision region.
 			var sampledPixels = [];
 			for (var i = 0, offset, r, g, b, a; i < block.pixels.length; i += sampleQuality) {
 				offset = i * 4;
