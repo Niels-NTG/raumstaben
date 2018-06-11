@@ -4,18 +4,20 @@ var textElement;
 
 var speechRec;
 var speech;
+var lang = navigator.language || 'de';
 
 function setup() {
 	noCanvas();
 
 	// Setup speech synth
 	speech = new p5.Speech();
+	speech.setLang(lang);
 
 	// Create text element on the page
 	textElement = createDiv('say something');
 
 	// Setup speech recognition
-	speechRec = new p5.SpeechRec();
+	speechRec = new p5.SpeechRec(lang);
 
 	// Show speech recognition results in textElement
 	speechRec.onResult = onSpeak;
@@ -37,5 +39,5 @@ function onSpeak() {
 }
 
 function sayText() {
-	speech.speak(textElement.html());
+	speech.speak(speechRec.resultString);
 }

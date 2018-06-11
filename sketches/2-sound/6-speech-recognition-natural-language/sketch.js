@@ -3,6 +3,7 @@
 var textElement;
 
 var speechRec;
+var lang = navigator.language || 'en-US';
 
 // PENN tags https://rednoise.org/rita/reference/PennTags.html
 var posTagList = {
@@ -52,7 +53,7 @@ function setup() {
 	analyzeText('say something');
 
 	// Setup speech recognition
-	speechRec = new p5.SpeechRec();
+	speechRec = new p5.SpeechRec(lang);
 
 	// Show speech recognition results in textElement
 	speechRec.onResult = onSpeak;
