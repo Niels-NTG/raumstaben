@@ -1,7 +1,7 @@
 // Webcam color sampler.
 
 var capture;
-var sampleColorCount = 100;
+var sampleColorCount = 32;
 var sampleQuality = 100;
 
 var rowCount = 8;
@@ -37,29 +37,30 @@ function draw() {
 	var columnPixelSize = capture.width / columnCount;
 
 	// Iterate through each subdivision
-	for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-		for (var columnIndex = 0; columnIndex < columnCount; columnIndex++)	{
+	for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+		for (let columnIndex = 0; columnIndex < columnCount; columnIndex++)	{
 
 			// Get a region of pixels from the capture image at the current subdivision
-			var block = capture.get(columnPixelSize * columnIndex, rowPixelSize * rowIndex, columnPixelSize, rowPixelSize);
+			let block = capture.get(columnPixelSize * columnIndex, rowPixelSize * rowIndex, columnPixelSize, rowPixelSize);
 			block.loadPixels();
 
+			// Real pixel count is equal to the pixels array, which is in actuality an array of subpixels,
+			// (red, green, blue, alpha). By dividing it by 4 we get the actual number of pixels.
+			let realBlockPixelCount = block.pixels.length / 4;
+
 			// Sample quantized average color from subdivision region.
-			var sampledPixels = [];
-			for (var i = 0, offset, r, g, b, a; i < block.pixels.length; i += sampleQuality) {
+			let sampledPixels = new Array(realBlockPixelCount);
+			for (let i = 0, offset, r, g, b; i < realBlockPixelCount; i += sampleQuality) {
 				offset = i * 4;
 				r = block.pixels[offset + 0];
 				g = block.pixels[offset + 1];
 				b = block.pixels[offset + 2];
-				a = block.pixels[offset + 3];
-				if (a >= 125) {
-					if (!(r > 200 && g > 200 && b > 200)) {
-						sampledPixels.push([r, g, b]);
-					}
+				if (!(r > 200 && g > 200 && b > 200)) {
+					sampledPixels.push([r, g, b]);
 				}
 			}
-			var cmap = MMCQ.quantize(sampledPixels, sampleColorCount);
-			var fillColor = (cmap ? color(cmap.palette()[0]) : color(0)).toString();
+			let cmap = MMCQ.quantize(sampledPixels, sampleColorCount);
+			let fillColor = (cmap ? color(cmap.palette()[0]) : color(0)).toString();
 			fill(fillColor);
 			rect(columnPixelSize * columnIndex, rowPixelSize * rowIndex, columnPixelSize, rowPixelSize);
 		}
