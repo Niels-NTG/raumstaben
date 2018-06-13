@@ -4,6 +4,7 @@ var capture;
 var showCapture = true;
 var sampleColorCount = 100;
 var sampleQuality = 1;
+var realPixelCount = 0;
 
 var font = null;
 var fontSize = 60;
@@ -24,6 +25,7 @@ function setup() {
 	capture.size(640, 480);
 	capture.position(0, 0);
 	capture.hide();
+	realPixelCount = capture.width * capture.height;
 
 	createCanvas(windowWidth, windowHeight);
 
@@ -62,16 +64,13 @@ function draw() {
 	// Load raw pixel data from video input
 	capture.loadPixels();
 	var sampledPixels = [];
-	for (var i = 0, offset, r, g, b, a; i < capture.pixels.length; i += sampleQuality) {
+	for (let i = 0, offset, r, g, b; i < realPixelCount; i += sampleQuality) {
 		offset = i * 4;
 		r = capture.pixels[offset + 0];
 		g = capture.pixels[offset + 1];
 		b = capture.pixels[offset + 2];
-		a = capture.pixels[offset + 3];
-		if (a >= 125) {
-			if (!(r > 250 && g > 250 && 250)) {
-				sampledPixels.push([r, g, b]);
-			}
+		if (!(r > 200 && g > 200 && b > 200)) {
+			sampledPixels.push([r, g, b]);
 		}
 	}
 	var cmap = MMCQ.quantize(sampledPixels, sampleColorCount);
@@ -94,14 +93,14 @@ function renderText() {
 	textElement.style.color = textColor;
 
 	// Apply variable font settings
-	textElement.style.fontVariationSettings = fontAxes.map(function (axis) {
+	textElement.style.fontVariationSettings = fontAxes.map((axis) => {
 		return '"' + axis.tag + '" ' + axis[axis.tag];
 	}).join(', ');
 }
 
 function updateGUI() {
 	// Show font info: name, font axis count and axis tags
-	var axesNames = fontAxes.map(function (axis) {
+	var axesNames = fontAxes.map((axis) => {
 		return axis.tag + ' (' + axis.name.en + ')';
 	}).join('\n');
 	gui.setValue('font info',
@@ -113,7 +112,7 @@ function updateGUI() {
 	);
 
 	// Create sliders for each variable font axis
-	fontAxes.forEach(function (axis) {
+	fontAxes.forEach((axis) => {
 		gui.bindRange(axis.tag, axis.minValue, axis.maxValue, axis.defaultValue, 0.01, axis);
 	});
 }
@@ -122,7 +121,7 @@ function loadFontFile(file) {
 	if (file) {
 		fontFileName = URL.createObjectURL(file);
 	}
-	opentype.load(fontFileName, function(err, font) {
+	opentype.load(fontFileName, (err, font) => {
 		if (err) {
 			console.warn(err);
 			return;
@@ -135,13 +134,13 @@ function onFontLoaded(font) {
 	window.font = font;
 
 	// Remove old font axis controls
-	fontAxes.forEach(function (axis) {
+	fontAxes.forEach((axis) => {
 		gui.removeControl(axis.tag);
 	});
 
 	// Add current value at value of default axis value.
 	fontAxes = font.tables.fvar.axes;
-	fontAxes = fontAxes.map(function (axis) {
+	fontAxes = fontAxes.map((axis) => {
 		axis[axis.tag] = axis.defaultValue;
 		return axis;
 	});

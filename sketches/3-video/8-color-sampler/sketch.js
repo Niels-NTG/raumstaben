@@ -49,7 +49,7 @@ function draw() {
 			let realBlockPixelCount = block.pixels.length / 4;
 
 			// Sample quantized average color from subdivision region.
-			let sampledPixels = new Array(realBlockPixelCount);
+			let sampledPixels = [];
 			for (let i = 0, offset, r, g, b; i < realBlockPixelCount; i += sampleQuality) {
 				offset = i * 4;
 				r = block.pixels[offset + 0];
