@@ -29,12 +29,12 @@ function setup() {
 	gui.bindRange('sampleQuality', 1, 640, sampleQuality, 1, window);
 	gui.bindNumber('rowCount', 1, windowHeight, rowCount, 1, window);
 	gui.bindNumber('columnCount', 1, windowWidth, columnCount, 1, window);
+
+	// Update drawing every time the camera has a new frame ready
+	capture.elt.ontimeupdate = onNewFrame;
 }
 
-function draw() {
-	// Start drawing if webcam is ready
-	if (!capture.loadedmetadata) return;
-
+function onNewFrame() {
 	// Calculate vertical and horizontal pixel size
 	var captureRowPixelSize = capture.height / rowCount;
 	var captureColumnPixelSize = capture.width / columnCount;
