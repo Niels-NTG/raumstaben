@@ -20,6 +20,12 @@ body > h1 {
     font-kerning: none;
 }
 
+body > p {
+    margin: 1rem;
+    font-weight: 200;
+    max-width: calc(100% - 4em);
+}
+
 section {
     margin: 1em;
     padding: 1em;

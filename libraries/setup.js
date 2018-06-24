@@ -53,6 +53,19 @@ var html = '<head>\n';
 html += '\t<link href="styles/list.css" rel="stylesheet" type="text/css">\n';
 html += '</head>\n<body>\n';
 html += '<h1>RAUMSTABEN</h1>\n';
+html += '<p>';
+html += 'schrift in raum und zeit\n';
+html += 'schrift in bewegung\n';
+html += 'schrift mit verhalten\n';
+html += 'schrift interaktiv\n';
+html += 'schrift im netz\n';
+html += 'wir erkunden die medialen moeglichkeiten von schrift und zeichen.\n';
+html += 'was passiert mit der information, wenn diese formen von generativer schrift ein eigenleben bekommen und man mit diesen wesen interagiert?\n';
+html += 'wie nehmen wir sie wahr wenn sich ploetzlich form und farbe veraendert, sie sich in raum und zeit bewegt, klingt und in einer anderen frequenz schwingt?\n';
+html += 'was sollte schrift im immateriellen kommunikationsraum leisten koennen?\n';
+html += 'wie lesen wir, wenn das was wir lesen auf uns reagiert?\n';
+html += 'mit dem neuen opentype - format der variable - fonts, html5 und der einbindung von processing duch P5.js kommt eine vielzahl von gestalterischen moeglichkeiten hinzu, schrift im internet einzusetzen.';
+html += '</p>\n';
 sketchCategories.forEach(sketchCategory => {
 
     let categorySketches = sketchList.filter(sketch => {
