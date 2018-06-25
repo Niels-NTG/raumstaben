@@ -64,7 +64,7 @@ html += 'was passiert mit der information, wenn diese formen von generativer sch
 html += 'wie nehmen wir sie wahr wenn sich ploetzlich form und farbe veraendert, sie sich in raum und zeit bewegt, klingt und in einer anderen frequenz schwingt?\n';
 html += 'was sollte schrift im immateriellen kommunikationsraum leisten koennen?\n';
 html += 'wie lesen wir, wenn das was wir lesen auf uns reagiert?\n';
-html += 'mit dem neuen opentype - format der variable - fonts, html5 und der einbindung von processing duch P5.js kommt eine vielzahl von gestalterischen moeglichkeiten hinzu, schrift im internet einzusetzen.';
+html += 'mit dem neuen opentype - format der variable - fonts, html5 und der einbindung von processing durch P5.js kommt eine vielzahl von gestalterischen moeglichkeiten hinzu, schrift im internet einzusetzen.';
 html += '</p>\n';
 sketchCategories.forEach(sketchCategory => {
 
