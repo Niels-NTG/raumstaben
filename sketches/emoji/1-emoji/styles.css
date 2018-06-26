@@ -1,0 +1,40 @@
+#introduction {
+    text-decoration: underline;
+    margin: 1em;
+    font-size: 1.8em;
+    max-width: 20%;
+}
+
+#face {
+    font-size: 32em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#sliders {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 20%;
+    font-size: 1.8em;
+    margin: 1em;
+}
+
+#sliders > input {
+    display: block;
+    width: 100%;
+    height: 4em;
+}
+
+#sliders > input::after {
+    content: attr(name);
+}
