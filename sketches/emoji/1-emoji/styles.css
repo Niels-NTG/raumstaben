@@ -1,3 +1,7 @@
+h1 {
+    display: none;
+}
+
 #introduction {
     text-decoration: underline;
     margin: 1em;
@@ -37,4 +41,28 @@
 
 #sliders > input::after {
     content: attr(name);
+}
+
+@media print {
+    h1 {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 1em;
+        width: 100%;
+        margin: 0;
+        font-weight: 400;
+        text-align: right;
+        transform-origin: right;
+        transform: translate(-100%, 0) rotate(-90deg);
+        font-size: 4em;
+    }
+
+    #introduction {
+        display: none;
+    }
+
+    #sliders {
+        display: none;
+    }
 }

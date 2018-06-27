@@ -63,8 +63,6 @@ function onFontLoaded(font) {
 }
 
 function exportPrint() {
-	// TODO create print CSS page styling
-
 	window.print();
 }
 
